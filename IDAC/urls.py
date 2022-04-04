@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+
 from django.conf.urls.static import static
 from django.conf import settings
+admin.site.site_header = "IDAC Admin"
+admin.site.site_title = "IDAC Admin Portal"
+admin.site.index_title = "Welcome to IDAC Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
