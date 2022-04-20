@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render,HttpResponse
-from .forms import RegisterForm
+from .forms import ContactForm, RegisterForm
 
 # Create your views here.
 def index (request):
@@ -10,6 +10,18 @@ def explore (request):
 def about (request):
     return render(request,'about.html')
 def contact (request):
+    if request.method == "POST":
+        print("Hi")
+       
+        form = ContactForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+
+            return redirect("/")
+
+        else:
+            form = ContactForm()
     return render(request,'Contact.html')
 def signup (request):
     return render(request,'signup.html')
