@@ -1,4 +1,5 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import redirect, render,HttpResponse
+from .forms import RegisterForm
 
 # Create your views here.
 def index (request):
@@ -13,4 +14,18 @@ def contact (request):
 def signup (request):
     return render(request,'signup.html')
 def login (request):
-    return render(request,'login.html')
+    return redirect("/accounts/login")
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+
+            return redirect("/")
+
+        else:
+            form = RegisterForm()
+
+        return render(request, "signup.html", {"form":form})
+    return render(request, "signup.html")
